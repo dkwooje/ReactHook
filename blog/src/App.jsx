@@ -1,8 +1,20 @@
 import { useState } from "react";
 
+const heaveyWork = () =>{
+  console.log('무거운 작업');
+  return(['홍길동', '김민수']);
+}
+
 function App() {
 
-  const [names,setNames] = useState(["홍길동", "김민수"]);
+  // const [names,setNames] = useState(heaveyWork());
+  //위의 코드를 사용하면 랜더링할 때 마다 사용되므로 비효율적이다.
+
+  const [names,setNames] = useState(() => {
+    return heaveyWork();
+  });
+
+
   const [input,setInput] = useState('');
 
   const handleInput = (e) =>{
@@ -15,8 +27,6 @@ function App() {
       return([input, ...prevState])
     });
   }
-
- 
 
   return (
     <div>
