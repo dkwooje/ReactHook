@@ -1,40 +1,21 @@
 import { useState } from "react";
 
-const heaveyWork = () =>{
-  console.log('무거운 작업');
-  return(['홍길동', '김민수']);
-}
-
 function App() {
 
-  // const [names,setNames] = useState(heaveyWork());
-  //위의 코드를 사용하면 랜더링할 때 마다 사용되므로 비효율적이다.
+  const [time,setTime] = useState(1);
 
-  const [names,setNames] = useState(() => {
-    return heaveyWork();
-  });
-
-
-  const [input,setInput] = useState('');
-
-  const handleInput = (e) =>{
-    setInput(e.target.value);
-  }
-
-  const handleUpload = () => {
-    setNames((prevState) => {
-      console.log('이전 state', prevState);
-      return([input, ...prevState])
-    });
-  }
+  function handleTime(){
+    if(time>=12){
+      setTime(1);
+    }else{
+      setTime(time + 1);
+    }
+  } 
 
   return (
     <div>
-      <input type="text" value={input} onChange={handleInput} />
-      <button onClick={handleUpload}>upload</button>
-      {names.map((name, idx) => {
-        return <p key={idx}>{name}</p>
-      })}
+      <span>현제 시각: {time}시</span>
+      <button onClick={handleTime}>Update</button>
     </div>
   );
 }
