@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Timer from "./component/Timer";
 
 function App() {
@@ -8,7 +8,10 @@ function App() {
   return (
     <div>
       {showTimer && <Timer />}
-      <button onClick={()=> setShowTimer(!showTimer)}>Toggle Timer</button>
+      <button onClick={function(){
+        setShowTimer(!showTimer)
+      }}
+        >Toggle Timer</button>
     </div>
   );
 }
