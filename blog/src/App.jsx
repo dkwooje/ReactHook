@@ -2,20 +2,29 @@ import { useState } from "react";
 
 function App() {
 
-  const [time,setTime] = useState(1);
+  const [names,setNames] = useState(["홍길동", "김민수"]);
+  const [input,setInput] = useState('');
 
-  const handleTime = () => {
-    if(time>=12){
-      setTime(1);
-    }else{
-      setTime(time + 1);
-    }
-  } 
+  const handleInput = (e) =>{
+    setInput(e.target.value);
+  }
+
+  const handleUpload = () => {
+    setNames((prevState) => {
+      console.log('이전 state', prevState);
+      return([input, ...prevState])
+    });
+  }
+
+ 
 
   return (
     <div>
-      <span>현제 시각: {time}시</span>
-      <button onClick={handleTime}>Update</button>
+      <input type="text" value={input} onChange={handleInput} />
+      <button onClick={handleUpload}>upload</button>
+      {names.map((name, idx) => {
+        return <p key={idx}>{name}</p>
+      })}
     </div>
   );
 }
