@@ -1,29 +1,19 @@
-import { useRef, useEffect } from "react";
-
+import {  useState } from "react";
+import Page from "./components/Page";
+import './App.css';
 
 function App() {
 
-  const inputRef = useRef();
-
-  useEffect(()=>{
-    console.log(inputRef);
-    inputRef.current.focus();
-
-}, []);
-
-
-  function login(){
-    alert(`환영합니다. ${inputRef.current.value}!`);
-    inputRef.current.focus();
-  }
+  const [isDark,setIsDark] = useState(false);
 
   return (
     <div>
-      <input ref={inputRef} type="text" placeholder="username" />
-      <button onClick={login}>로그인</button>
+      <Page isDark={isDark} setIsDark={setIsDark} />
     </div>
   );
 }
 
 export default App;
 
+//useContext는 컴포넌트간의 props를 간단하게 전달해준다.
+//단 context는 컴포넌트를 재사용하기 어려워진다.
