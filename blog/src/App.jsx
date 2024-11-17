@@ -12,7 +12,7 @@ function App() {
 
   const [names,setNames] = useState(
     function(){                   //익명함수: 한 번만 사용하거나 특정한 곳에서 바로 실행되도록 정의
-    return heaveyWork();     
+    return heaveyWork();          //익명함수는 화살표 함수로 바꿔 쓸 수 있다.
   });
 
   const [input,setInput] = useState('');
@@ -22,7 +22,8 @@ function App() {
   }
 
   function handleUpload(){
-    setNames((prevState) => {
+    setNames(
+      function(prevState){
       console.log('이전 state', prevState);
       return([input, ...prevState])
     });
