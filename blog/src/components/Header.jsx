@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 
-export default function Header({isDark}){
+export default function Header(){
+
+    const {isDark} = useContext(ThemeContext);
+
     return(
         <header className="header" 
         style={

@@ -1,6 +1,11 @@
+import { ThemeContext } from "../context/ThemeContext";
+import { useContext } from "react";
 
 
-export default function Content({isDark}){
+export default function Content(){
+
+    const {isDark} = useContext(ThemeContext);
+
     return(
         <div className="content" 
             style={{

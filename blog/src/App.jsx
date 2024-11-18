@@ -1,6 +1,7 @@
 import {  useState } from "react";
 import Page from "./components/Page";
 import './App.css';
+import { ThemeContext } from "./context/ThemeContext";
 
 function App() {
 
@@ -8,7 +9,9 @@ function App() {
 
   return (
     <div>
-      <Page isDark={isDark} setIsDark={setIsDark} />
+      <ThemeContext.Provider value={{isDark,setIsDark}}>
+      <Page />
+      </ThemeContext.Provider>
     </div>
   );
 }
