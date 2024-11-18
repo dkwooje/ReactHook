@@ -1,85 +1,40 @@
-import { useReducer, useState } from "react";
-import Student from "./Student";
-
-const reducer = (state,action) => {
-  switch(action.type){
-    case 'add-student':
-      const name = action.payload.name;
-      const newStudent = {
-        id: Date.now(),
-        name,
-        isHere: false,
-      }
-      return{
-        count: state.count +1 ,
-        students: [...state.students, newStudent]
-      }
-     case 'delete-student':
-      return{
-        count: state.count -1 ,
-        students: state.students.filter(student => student.id !== action.payload.id)
-      }
-      case 'mark-student':
-        return{
-          count: state.count,
-          students: state.students.map(student => {
-            if(student.id === action.payload.id){
-              return {...student, isHere: !student.isHere}
-            }
-            return student;
-          })
-        }
-    default:
-      return state;
-  }
-};
-
-const initialState ={
-  count: 0,
-  students: [
-  /*  {
-      id: Date.now(),
-      name: 'James',
-      isHere: false
-    }
-  */    
-  ]
-}
-
+import { useState } from "react";
+import Child from "./Child";
 
 function App() {
-  
-  const [name, setName] = useState('');
-  const [studentsInfo,dispatch] = useReducer(reducer,initialState)
+    
+    const [parentAge, setParentAge] = useState(0);
+    const [ChildAge, setChildAge] = useState(0);
 
+    function incrementParentAge(){
+      setParentAge(parentAge + 1);
+    }
+
+    function incrementChildAge(){
+      setChildAge(ChildAge + 1);
+    }
+
+    console.log('부모 컴포넌트가 렌더링이 되었습니다.');
 
   return (
-    <div>
-      <h1>출석부</h1>
-      <p>총 학생 수: {studentsInfo.count}</p>
-      <input 
-      type="text" 
-      placeholder="이름을 입력해주세요" 
-      value={name} 
-      onChange={(e)=> setName(e.target.value)}
-      />
-      <button onClick={() => {
-        dispatch({type: 'add-student', payload: {name}})
-      }}>추가</button>
-      {studentsInfo.students.map((student)=> { 
-        return (
-        <Student 
-        key={student.id} 
-        name={student.name} 
-        dispatch={dispatch} 
-        id={student.id} 
-        isHere={student.isHere}
-        />
-      )
-      })}
+    <div style={
+      {
+        border: '2px solid navy', 
+        padding: '10px'
+      }
+    }>
+      <h1>부모</h1>
+      <p>age: {parentAge}</p>
+      <button onClick={incrementParentAge}>부모 나이 증가</button>
+      <button onClick={incrementChildAge}>부모 나이 증가</button>
+      <Child name={'아무게'} age={ChildAge} />
     </div>
   );
 }
 
 export default App;
 
+//React.memo : 렌더링 횟수 제안에 특화. 컴포넌트를 최적화.(prop check)
+//React.memo가 필요할 때 :1. 컴포넌트가 같은 Props로 자주 렌더링 될 때 
+//2.컴포넌트가 렌더링이 될때마다 복잡한 로직을 처리해야할때
+//이외에는 굳이 React.memo를 사용할 필요가 없다.
