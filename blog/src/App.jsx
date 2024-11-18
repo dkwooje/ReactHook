@@ -1,47 +1,32 @@
-import {  useState, useMemo } from "react";
-
-function hardCalculate(number){
-  console.log('어려운 계산');
-  for (let i = 0; i<9999999990; i++){
-
-  }
-  return number + 10000;
-}
-
-function easyCalculate(number){
-  console.log('쉬운 계산');
-  return number + 1.;
-}
+import {  useState, useMemo, useEffect } from "react";
 
 
 function App() {
 
-  const [hardNumber, setHardNumber] = useState(1);
-  const [easyNumber, setEasyNumber] = useState(1);
+  const[number,setNumber] = useState(0);
+  const[isKorea,setIsKorea] = useState(true);
+  
+//  const location = isKorea ? '한국' : '외국'; //string
+    const location = { country: isKorea ? '한국' : '외국'}; //object
 
- // const hardSum = hardCalculate(hardNumber);
- const hardSum = useMemo(() => {
-  return hardCalculate(hardNumber)}, [hardNumber]);
-//useMemo의 첫번째 인자는 메모와이즈할 값을 return, 두번째 인자는 의존성 배열을 넣어준다.
-//의존성 배열의 값이 바뀔 때 만  메모와이즈가 발동한다.
+  useEffect(()=>{
+      console.log("useEffect 호출");
+  },[location]);
 
-  const easySum = easyCalculate(easyNumber);
+
 
   return (
     <div>
-      <h3>어려운 계산기</h3>
-      <input type="number" 
-      value={hardNumber} 
-      onChange={(e) => setHardNumber(parseInt(e.target.value))}
+      <h2>하루에 몇끼 먹어요?</h2>
+      <input 
+      type="number" 
+      value={number} 
+      onChange={(e) => setNumber(e.target.value)}
       />
-      <span> + 10000 = {hardSum}</span>
-
-      <h3>쉬운 계산기</h3>
-      <input type="number" 
-      value={easyNumber} 
-      onChange={(e) => setEasyNumber(parseInt(e.target.value))}
-      />
-      <span> + 1 = {easySum}</span>
+      <hr />
+      <h2>어느 나라에 있어요?</h2>
+      <p>나라: {location.country}</p>
+      <button onClick={()=> setIsKorea(!isKorea)}>비행기 타자</button>    
     </div>
   );
 }
