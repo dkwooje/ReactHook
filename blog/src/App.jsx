@@ -6,14 +6,14 @@ function App() {
   const[number,setNumber] = useState(0);
   const[isKorea,setIsKorea] = useState(true);
   
-//  const location = isKorea ? '한국' : '외국'; //string
-    const location = { country: isKorea ? '한국' : '외국'}; //object
+
+   // const location = { country: isKorea ? '한국' : '외국'}; 
+     const location = useMemo(() => {
+      return {country: isKorea ? '한국' : '외국'}},[isKorea]);
 
   useEffect(()=>{
       console.log("useEffect 호출");
   },[location]);
-
-
 
   return (
     <div>
@@ -33,6 +33,3 @@ function App() {
 
 export default App;
 
-//처음 랜더링 할때는 두 계산기가 불려 오래걸린다.
-//하지만 어려운 계산기는 메모화 해주었기 때문에,
-// 쉬운계산기를 작동시켜 랜더링 할 때 마다. 쉬운 계산기는 빠르게 동작할 수 있다.
