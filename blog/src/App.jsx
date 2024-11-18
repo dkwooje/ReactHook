@@ -1,25 +1,45 @@
 import {  useState } from "react";
-import Page from "./components/Page";
-import './App.css';
-import { ThemeContext } from "./context/ThemeContext";
-import { UserContext } from "./context/UserContext";
+
+function hardCalculate(number){
+  console.log('어려운 계산');
+  for (let i = 0; i<9999999990; i++){
+
+  }
+  return number + 10000;
+}
+
+function easyCalculate(number){
+  console.log('쉬운 계산');
+  return number + 1.;
+}
+
 
 function App() {
 
-  const [isDark,setIsDark] = useState(false);
+  const [hardNumber, setHardNumber] = useState(1);
+  const [easyNumber, setEasyNumber] = useState(1);
+
+  const hardSum = hardCalculate(hardNumber);
+  const easySum = easyCalculate(easyNumber);
 
   return (
     <div>
-      <UserContext.Provider value={'사용자'}>
-      <ThemeContext.Provider value={{isDark,setIsDark}}>
-      <Page />
-      </ThemeContext.Provider>
-      </UserContext.Provider>
+      <h3>어려운 계산기</h3>
+      <input type="number" 
+      value={hardNumber} 
+      onChange={(e) => setHardNumber(parseInt(e.target.value))}
+      />
+      <span> + 10000 = {hardSum}</span>
+
+      <h3>쉬운 계산기</h3>
+      <input type="number" 
+      value={easyNumber} 
+      onChange={(e) => setEasyNumber(parseInt(e.target.value))}
+      />
+      <span> + 1 = {easySum}</span>
     </div>
   );
 }
 
 export default App;
 
-//useContext는 컴포넌트간의 props를 간단하게 전달해준다.
-//단 context는 컴포넌트를 재사용하기 어려워진다.
