@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Box from "./Box";
 
 function App() {
@@ -6,13 +6,13 @@ function App() {
   const [size,setSize] = useState(100);
   const [isDark, setIsDark] = useState(false);
 
-  function BoxStyle(){
+  const BoxStyle = useCallback(()=>{
     return{
       backgroundColor: 'yellow',
       width: `${size}px`,
       height: `${size}px`
     };
-  };
+  }, [size]);
 
   return (
     <div    style={{background: isDark ? 'black' : 'white'}}>
