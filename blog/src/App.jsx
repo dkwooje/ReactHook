@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Child from "./Child";
 
 function App() {
@@ -10,11 +10,14 @@ function App() {
     }
 
     console.log('부모 컴포넌트가 렌더링이 되었습니다.');
-
-    const name = {
-      lastName: '홍',
-      firstName: '길동'
+/*
+    function tellMe(){
+      console.log('엘리아스 지도자');
     }
+*/
+  const tellMe = useCallback(()=>{
+    console.log('엘리아스 지도자');
+  },[]);
 
   return (
     <div style={
@@ -26,14 +29,12 @@ function App() {
       <h1>부모</h1>
       <p>age: {parentAge}</p>
       <button onClick={incrementParentAge}>부모 나이 증가</button>
-      <Child name={name} />
+      <Child name={"에르핀"} tellMe={tellMe} />
     </div>
   );
 }
 
 export default App;
 
-//React.memo : 렌더링 횟수 제안에 특화. 컴포넌트를 최적화.(prop check)
-//React.memo가 필요할 때 :1. 컴포넌트가 같은 Props로 자주 렌더링 될 때 
-//2.컴포넌트가 렌더링이 될때마다 복잡한 로직을 처리해야할때
-//이외에는 굳이 React.memo를 사용할 필요가 없다.
+//function tellMe와 같은 함수도 객체변수이므로 주소값이 전달하게 된다.
+//
