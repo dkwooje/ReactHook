@@ -1,38 +1,36 @@
-import { useId } from "react";
+import { useEffect, useId, useRef } from "react";
 
-
-
-function MyInput(){
-
-  const id = useId();
-
-  return(
-    <div>
-      <label htmlFor={`${id} -name`}>이름</label>
-      <input id={`${id} -name`}/>
-      <br />
-      <label htmlFor={`${id} -age`}>나이</label>
-      <input id={`${id} -age`}/>
-    </div>
-  )
-}
 
 function App() {
 
+  function MyInput(){
 
+    const id = useId();
+    const ref = useRef();
+    
+    console.log(id);
+
+    useEffect(()=>{
+    //  const element = document.querySelector(id)
+        const element = ref.current
+      console.log(element);
+    },[])
+  
+    return(
+      <div>
+        <button id="btn">버튼</button>
+        <label htmlFor={id}>이름</label>
+        <input id={id}/>
+      </div>
+    )
+  }
 
   return (
     <div>
       <MyInput />
-
     </div>
   );
 }
 
-
-
-
 export default App;
-//useId() input같은 form요소에 접근할 때 유용하다.
-//위와 같이 input과 label을 연동하면 UI에서 label을 눌러도 input에 포커싱할 수 있다.  
-//동일한 form요소를 사용할 때 
+//react에서 querySelector를 사용하기보다 ref를 사용하는것이 좋다. 
