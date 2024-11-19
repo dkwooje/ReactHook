@@ -1,24 +1,19 @@
-
-import useFetch from "./UseFetch";
-
-const baseUrl = "https://jsonplaceholder.typicode.com";
-
+import { useId } from "react";
 
 function App() {
 
-  const {data: userData} = useFetch(baseUrl,"users");
-  const {data: postData} = useFetch(baseUrl,"users");
-
+  const  id = useId();
+  console.log(id);
 
   return (
     <div>
-      <h1>user</h1>
-      {userData && <pre>{JSON.stringify(userData[1],null,2)}</pre>}
-      <h1>post</h1>
-      {postData && <pre>{JSON.stringify(userData[1],null,2)}</pre>}
+      <label htmlFor="name">이름</label>
+      <p></p>
+      <input id="name"/>
     </div>
   );
 }
 
 export default App;
-//
+//useId() input같은 form요소에 접근할 때 유용하다.
+//위와 같이 input과 label을 연동하면 UI에서 label을 눌러도 input에 포커싱할 수 있다.  
