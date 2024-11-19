@@ -2,15 +2,20 @@ import { useState } from "react";
 
 
 
-export default function useInput(value){
+export default function useInput(initialValue,submitAction){
        
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState(initialValue);
 
   function handleChange(e){
     setInputValue(e.target.value)
   } 
 
-  return [inputValue, handleChange]
+  function handleSubmit(){
+    setInputValue("");
+    submitAction(inputValue);
+  }
+
+  return [inputValue, handleChange, handleSubmit]
 }
 
 //custom hook은 배열을 return값을 받는다.
