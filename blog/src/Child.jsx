@@ -1,6 +1,6 @@
+import { memo } from "react";
 
-
-export default function Child({name,age}){
+function Child({name,age}){
     console.log('자녀 컴포넌트가 렌더링이 되었습니다.');
     return(
         <div style={
@@ -15,3 +15,4 @@ export default function Child({name,age}){
         </div>
     )
 }
+export default memo(Child);
