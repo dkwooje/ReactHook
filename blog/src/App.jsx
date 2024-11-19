@@ -1,24 +1,20 @@
-import useInput from "./UseInput";
+import { useEffect } from "react";
 
-function displayMessage(message){
-  alert(message);
-}
 
 function App() {
 
-  const [inputValue,handleChange,handleSubmit] = useInput('',displayMessage);
-
-
+  useEffect(() =>{
+    fetch("https://jsonplaceholder.typicode.com/posts") //users 대신 posts , todos 기입
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+  },[]);
 
   return (
     <div>
-      <h1>useInput</h1>
-      <input value={inputValue} onChange={handleChange} />
-      <button onClick={handleSubmit}>확인</button>
+      <h1>useFetch</h1>
     </div>
   );
 }
 
 export default App;
-
-//커스텀 훅으로 재사용성을 극대화 할 수 있다.
+//모크데이터 가짜 데이터를 불러보자
