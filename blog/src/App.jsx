@@ -4,17 +4,17 @@ import Child from "./Child";
 function App() {
     
     const [parentAge, setParentAge] = useState(0);
-    const [ChildAge, setChildAge] = useState(0);
-
+    
     function incrementParentAge(){
       setParentAge(parentAge + 1);
     }
 
-    function incrementChildAge(){
-      setChildAge(ChildAge + 1);
-    }
-
     console.log('부모 컴포넌트가 렌더링이 되었습니다.');
+
+    const name = {
+      lastName: '홍',
+      firstName: '길동'
+    }
 
   return (
     <div style={
@@ -26,8 +26,7 @@ function App() {
       <h1>부모</h1>
       <p>age: {parentAge}</p>
       <button onClick={incrementParentAge}>부모 나이 증가</button>
-      <button onClick={incrementChildAge}>부모 나이 증가</button>
-      <Child name={'아무게'} age={ChildAge} />
+      <Child name={name} />
     </div>
   );
 }
