@@ -30,14 +30,14 @@ function App() {
     }, 1000)
 
     return () =>{
-      clearTimeout(timerID); //useEffect의 리턴값으로 콜백함수를 넣어 다음 useEffect가 실행되기 전에 작동한다. 
-    }                   //cleanup 함수라고도 한다.
-   
+      clearTimeout(timerID);
+    }                  
+                      
   },[input]) 
   useEffect(()=>{ 
-    const users = fetchDataFromServer(input);
+    const users = fetchDataFromServer(debouncedInput);
     setResult(users);
-  },[input])
+  },[debouncedInput])
 
   return (
      <div className="container">
@@ -61,4 +61,3 @@ function App() {
 
 export default App;
 
-//타이핑을 할 때 마다 랜더링을 하기 때문에 매우 비효율적이다.
