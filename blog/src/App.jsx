@@ -23,13 +23,17 @@ function App() {
   const [debouncedInput,setDebouncedInput] = useState(input);
   const [result,setResult] = useState([]);
 
-  useEffect(()=>{
-    setTimeout(()=>{
+ useEffect(()=>{
+    const timerID = setTimeout(()=>{
       console.log("콜백호출");
       setDebouncedInput(input);
     }, 1000)
-  },[input])
 
+    return () =>{
+      clearTimeout(timerID); //useEffect의 리턴값으로 콜백함수를 넣어 다음 useEffect가 실행되기 전에 작동한다. 
+    }                   //cleanup 함수라고도 한다.
+   
+  },[input]) 
   useEffect(()=>{ 
     const users = fetchDataFromServer(input);
     setResult(users);
