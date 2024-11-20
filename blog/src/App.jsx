@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css" 
 
 function hackLottoNumbers(){
@@ -14,10 +14,16 @@ function hackLottoNumbers(){
 
 function App() {
   const [lottoNumbers,setLottoNumbers] = useState([0,0,0,0,0,0]);
+  const lastRun =useRef(Date.now());
 
   function handleClick(){
+   const timeElapsed = Date.now() - lastRun.current;
+
+   if(timeElapsed >= 1000){
     const result = hackLottoNumbers();
     setLottoNumbers(result)
+    lastRun.current = Date.now();
+   } 
   }
 
   
@@ -40,5 +46,4 @@ function App() {
 
 export default App;
 
-//Throttle 함수가 한번 호출 되면, 일정 시간이 지나기 전에 다시 호출되지 않도록 막는 것.
-//
+//Throttle이 구현되었다. '번호 맞추기'버튼을 누르면 1초후에만 다시 작동할 수 있다.
