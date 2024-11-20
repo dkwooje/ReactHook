@@ -1,36 +1,27 @@
-import { useEffect, useId, useRef } from "react";
-
+import { useEffect, useState } from "react";
 
 function App() {
+  const [count, setCount] =useState(0);
 
-  function MyInput(){
+  useEffect(()=>{
+    console.log("useEffect", count)
+  },[count])
 
-    const id = useId();
-    const ref = useRef();
-    
-    console.log(id);
 
-    useEffect(()=>{
-    //  const element = document.querySelector(id)
-        const element = ref.current
-      console.log(element);
-    },[])
-  
-    return(
-      <div>
-        <button id="btn">버튼</button>
-        <label htmlFor={id}>이름</label>
-        <input id={id}/>
-      </div>
-    )
-  }
+  function handleCountUpdate(){
+    setCount(count + 1);
+  };
 
   return (
     <div>
-      <MyInput />
+      <p>Count: {count}</p>
+      <button onClick={handleCountUpdate}>Update</button>
     </div>
   );
 }
 
 export default App;
-//react에서 querySelector를 사용하기보다 ref를 사용하는것이 좋다. 
+//useLayoutEffect는 useEffect와 구조가 비슷하다.
+//useEffect는 화면이 업데이트(랜더링)이 된 후 실행되지만
+//useLayoutEffect는 먼저 실행되고 랜더링이 된다.
+//useLayoutEffect는 UI변화를 더 정교하게 나타낼 수 있다.
