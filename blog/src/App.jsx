@@ -1,28 +1,35 @@
-import { useEffect,useLayoutEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+
+  function getNumbers(){
+    return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+  }
 
 function App() {
-  const [count, setCount] =useState(0);
+
+  const [numbers,setNumbers] = useState([]);
+  const ref = useRef(null);
 
   useEffect(()=>{
-    console.log("useEffect", count)
-  },[count])
-
-  useLayoutEffect(()=>{
-    console.log("useLayoutEffect", count)
-  },[count])
-
-
-  function handleCountUpdate(){
-    setCount(count + 1);
-  };
+    const nums = getNumbers();
+    setNumbers(nums);
+  }, [])
 
   return (
-    <div>
-      <p>Count: {count}</p>
-      <button onClick={handleCountUpdate}>Update</button>
+    <div 
+      ref={ref} 
+      style={
+      {
+        height: "300px",
+        border: "1px solid blue",
+        overflow: "scroll"
+      }}
+    >
+      {numbers.map((number,idx)=>(
+        <p key={idx}>{number}</p>
+      ))}
     </div>
   );
 }
 
 export default App;
-//useLayoutEffect는 useEffect보다 먼저 실행된다.
