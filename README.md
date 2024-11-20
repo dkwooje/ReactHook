@@ -2,7 +2,8 @@
 1.Get-ExecutionPolicy 
 2.Set-ExecutionPolicy RemoteSigned
 3.npx create-react-app blog
-4.npm start (서버실행)
+4.npm install
+5.npm start (서버실행)
 
 
 git을 활용해서 원하는 자료를 꺼내 보자.
