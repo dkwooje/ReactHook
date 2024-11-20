@@ -15,6 +15,14 @@ function App() {
     setNumbers(nums);
   }, [])
 
+  useEffect(()=>{
+    if(numbers.length === 0){
+      return;
+    }
+
+    ref.current.scrollTop = ref.current.scrollHeight;
+  },[numbers])
+
   return (
     <div 
       ref={ref} 
