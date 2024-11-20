@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import "./App.css" 
+import { useThrottle } from "./hooks/useThrottle";
 
 function hackLottoNumbers(){
   console.log("로또 번호 해킹중")
@@ -14,17 +15,12 @@ function hackLottoNumbers(){
 
 function App() {
   const [lottoNumbers,setLottoNumbers] = useState([0,0,0,0,0,0]);
-  const lastRun =useRef(Date.now());
 
-  function handleClick(){
-   const timeElapsed = Date.now() - lastRun.current;
 
-   if(timeElapsed >= 1000){
+  const handleClick = useThrottle(()=>{
     const result = hackLottoNumbers();
-    setLottoNumbers(result)
-    lastRun.current = Date.now();
-   } 
-  }
+    setLottoNumbers(result);
+  }, 1000);
 
   
   return (
