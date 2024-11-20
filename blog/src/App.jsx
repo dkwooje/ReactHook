@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDebounce } from "./debounce";
 
 function fetchDataFromServer(value){
   if(!value){
@@ -20,20 +21,9 @@ function fetchDataFromServer(value){
 function App() {
   
   const [input,setInput] = useState("");
-  const [debouncedInput,setDebouncedInput] = useState(input);
+  const debouncedInput = useDebounce(input, 500);
   const [result,setResult] = useState([]);
 
- useEffect(()=>{
-    const timerID = setTimeout(()=>{
-      console.log("콜백호출");
-      setDebouncedInput(input);
-    }, 1000)
-
-    return () =>{
-      clearTimeout(timerID);
-    }                  
-                      
-  },[input]) 
   useEffect(()=>{ 
     const users = fetchDataFromServer(debouncedInput);
     setResult(users);
