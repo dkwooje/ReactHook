@@ -20,8 +20,10 @@ function App() {
       return;
     }
 
+    for(let i = 0; i<300000000; i++){} //고의적 딜레이 
+
     ref.current.scrollTop = ref.current.scrollHeight;
-  },[numbers])
+  },[numbers])  //scroll이 자동으로 최하단에 위치하도록 조치
 
   return (
     <div 
@@ -41,3 +43,5 @@ function App() {
 }
 
 export default App;
+
+//개발자 모드에서 Performance로 들어가 CPU를 6배 느리게 설정 해주자.
