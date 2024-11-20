@@ -20,7 +20,15 @@ function fetchDataFromServer(value){
 function App() {
   
   const [input,setInput] = useState("");
+  const [debouncedInput,setDebouncedInput] = useState(input);
   const [result,setResult] = useState([]);
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      console.log("콜백호출");
+      setDebouncedInput(input);
+    }, 1000)
+  },[input])
 
   useEffect(()=>{ 
     const users = fetchDataFromServer(input);
@@ -49,7 +57,4 @@ function App() {
 
 export default App;
 
-//함수가 너무 많아(특히 서버비에 부담이 되는 함수) 문제가 될때 
-//Debounce와 Throttle을 사용한다. 이 기능은 함수가 너무 자주 호출되는것을 방지한다.
-//Debounce: 특정 이벤트가 연속적으로 발생할 때, 제일 마지막 이벤트가 발생한 후
-//일정 시간이 지난 후에 함수를 호출함
+//타이핑을 할 때 마다 랜더링을 하기 때문에 매우 비효율적이다.
