@@ -19,8 +19,13 @@ function App() {
       />
       <button onClick={addToList}>추가</button>
       <ul>
-        {list.map((item)=>{
-            return <li key={item}>{item}</li>
+        {list.map((item,index)=>{ {/* list.map((item)*/}
+            return (
+              <div key={index}> {/* key={item} */}
+                <li>{item}</li>
+                <input />
+              </div>
+            )
         })}
       </ul>
     </>
@@ -28,5 +33,6 @@ function App() {
 }
 
 export default App;
-//list형태로 엘리먼트를  표현하면 key값을 prop으로 가져야한다.
-//그렇지 않으면 모든 list(새로생긴 list 포함)가 공유된다.
+//그런데 index값을 키로 넘겨주면 모든 list가 공유된다.
+//index를 키로 사용하는것은 매우 불안정하다.
+//그러니 list항목이 변경되는 동적인 list라면 index를 키로 사용하지 말아야 한다.
