@@ -1,11 +1,9 @@
+import { forwardRef } from "react";
+
+const MyInput = forwardRef((porps,ref)=>{
+    return <input ref={ref} />;
+});
 
 
 
-
-function MyInput(){
-    return(
-        <input />
-    )
-
-}
 export default MyInput;

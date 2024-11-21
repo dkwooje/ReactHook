@@ -1,5 +1,5 @@
 import { useRef } from "react";
-
+import MyInput from "./MyInput";
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div>
-      <input ref={inputRef} /> 
+      <MyInput ref={inputRef} />
       <button onClick={focus}>집중</button>
     </div>
   );
