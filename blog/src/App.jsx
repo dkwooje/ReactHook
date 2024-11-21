@@ -20,7 +20,7 @@ function App() {
       <button onClick={addToList}>추가</button>
       <ul>
         {list.map((item)=>{
-            return <li>{item}</li>
+            return <li key={item}>{item}</li>
         })}
       </ul>
     </>
