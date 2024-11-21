@@ -1,37 +1,13 @@
-*{
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: sans-serif;
-}
-
-.container{
-  margin-top: 100px;
+.App{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: 1px solid black;
+  justify-content: space-between;
 }
 
-.buttom{
-  margin-top: 10px;
-  font-size: 25px;
-  padding: 5px 30px;
+h1{
+  background-color: powderblue;
 }
 
-.numbers{
-  display: flex;
-  gap: 15px;
-}
-
-.number{
-  margin-top: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: skyblue;
-  color: yellow;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  font-size: 25px;
+p{
+  background-color: pink;
 }
