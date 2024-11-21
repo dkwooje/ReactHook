@@ -1,13 +1,7 @@
-.App{
-  display: flex;
+table{
   border: 1px solid black;
-  justify-content: space-between;
 }
 
-h1{
-  background-color: powderblue;
-}
-
-p{
-  background-color: pink;
+td{
+  border: 1px solid black;
 }
