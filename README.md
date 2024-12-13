@@ -13,7 +13,7 @@ git을 활용해서 원하는 자료를 꺼내 보자.
 3. 'git checkout main' 원래 브랜치로 이동
 
 
-이 레포지토리는 React에서 사용하는 여러 기술을 정리해보았습니다.
+이 레포지토리는 React에서 사용하는 여러 기술을 정리해보았습니다..
 1.useState 
 2.useEffect
 3.useRef
