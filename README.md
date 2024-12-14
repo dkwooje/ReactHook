@@ -29,12 +29,32 @@ git을 활용해서 원하는 자료를 꺼내 보자.
 
 
 useState 
+useState는 React의 함수형 컴포넌트에서 상태 관리를 위해 사용되는 Hook입니다.
+예시 :
 <button onClinck={함수} />
 <input value={현재상태} onChange={함수} />
 
 useEffect
+useEffect는 React의 Hook 중 하나로, 컴포넌트의 생명주기와 관련된 작업을 처리하기 위해 사용됩니다. 함수형 컴포넌트에서 사이드 이펙트(외부 시스템과의 상호작용, 비동기 작업 등)를 관리할 수 있도록 도와줍니다.
+예시:
 
+useEffect(() => {
+  // 실행할 코드
+  return () => {
+    // 정리(cleanup) 작업
+  };
+}, [dependencies]);
 
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []); // 컴포넌트가 처음 렌더링될 때만 실행
+
+사용 목적:
+컴포넌트가 처음 렌더링될 때 실행
+의존성 값이 변경될 때 실행
+컴포넌트가 언마운트되거나 업데이트 전에 정리 작업 실행
 
 
 3.useRef
