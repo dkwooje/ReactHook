@@ -104,5 +104,11 @@ function PollingExample() {
   return <div>{data ? JSON.stringify(data) : "로딩 중..."}</div>;
 }
 
+요약
+setInterval: 지정한 간격으로 반복 작업을 수행하는 함수.
+React에서 useEffect와 함께 사용하여 타이머 설정 및 정리를 관리.
+clearInterval: 타이머를 중지하고 메모리 누수를 방지.
+사용 예시: 실시간 시계, 주기적인 데이터 갱신, 애니메이션 효과 등.
+
 3.useRef
 
