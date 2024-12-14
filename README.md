@@ -21,7 +21,12 @@ git을 활용해서 원하는 자료를 꺼내 보자.
    e: 이벤트 객체.
    e.target: 이벤트가 발생한 HTML 요소.
    e.target.value: 해당 요소의 현재 값 (주로 input, textarea, select에서 사용).
-2. 
+2. e.target.checked: 체크박스나 라디오 버튼의 선택 상태를 확인할 때 사용합니다.
+3. e.preventDefault(): 이벤트의 기본 동작(예: 폼 제출, 링크 이동 등)을 막습니다.
+4. e.stopPropagation(): 이벤트 버블링을 중단시킵니다. 부모 요소로 이벤트가 전파되지 않도록 합니다.
+5. setTimeout과 setInterval: 상태를 일정 시간 후 변경하거나, 주기적으로 작업을 수행할 때 사용합니다.
+6. debounce와 throttle: 입력 이벤트를 제어하여 성능을 최적화합니다.
+
 
 useState 
 <button onClinck={함수} />
