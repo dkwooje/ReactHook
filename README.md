@@ -15,6 +15,11 @@ git을 활용해서 원하는 자료를 꺼내 보자.
 
 이 레포지토리는 React에서 사용하는 여러 기술을 정리해보았습니다..
 1.useState 
+<button onClinck={함수} />
+<input value={현재상태} onChange={함수} />
+
+
+
 2.useEffect
 3.useRef
 
