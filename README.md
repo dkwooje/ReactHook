@@ -69,5 +69,40 @@ useEffect(() => {
         }
      }, []);
 
+     function PollingExample() {
+  const [data, setData] = useState(null);
+  
+실사용 예시:
+
+function Clock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date()); // 매 초 상태 업데이트
+    }, 1000);
+
+    return () => clearInterval(timer); // 언마운트 시 타이머 해제
+  }, []);
+
+  return <div>현재 시간: {time.toLocaleTimeString()}</div>;
+}
+
+function PollingExample() {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      fetch("https://api.example.com/data")
+        .then((response) => response.json())
+        .then((data) => setData(data));
+    }, 5000); // 5초마다 데이터 가져오기
+
+    return () => clearInterval(timer); // 타이머 정리
+  }, []);
+
+  return <div>{data ? JSON.stringify(data) : "로딩 중..."}</div>;
+}
+
 3.useRef
 
