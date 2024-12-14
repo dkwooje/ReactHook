@@ -112,3 +112,96 @@ clearInterval: 타이머를 중지하고 메모리 누수를 방지.
 
 3.useRef
 
+useRef의 특징:
+1.React 렌더링 사이클에 영향을 주지 않음
+useRef로 저장된 값은 변경되어도 컴포넌트를 다시 렌더링하지 않습니다.
+
+초기값 설정 가능
+2.useRef(initialValue)를 사용해 초기값을 설정할 수 있습니다.
+
+3.current 속성
+반환된 객체는 { current: initialValue } 형태로, 참조하려는 값은 current 속성을 통해 접근합니다.
+
+1. DOM 요소 참조
+useRef는 DOM 요소를 참조할 때 가장 자주 사용됩니다. React에서는 보통 DOM을 직접 조작하지 않지만, 예외적으로 포커스 설정, 스크롤 위치, 캔버스 작업 등에서 유용합니다.
+
+예제: 입력 필드에 포커스 설정
+import React, { useRef } from "react";
+
+function FocusInput() {
+  const inputRef = useRef(null); // DOM 요소를 참조하기 위한 ref 생성
+
+  const handleFocus = () => {
+    inputRef.current.focus(); // input 요소에 포커스 설정
+  };
+
+  return (
+    <div>
+      <input ref={inputRef} type="text" placeholder="포커스할 입력 필드" />
+      <button onClick={handleFocus}>포커스</button>
+    </div>
+  );
+}
+
+export default FocusInput;
+작동 과정:
+useRef(null)로 초기 ref 객체 생성.
+ref 속성을 통해 DOM 요소를 inputRef에 연결.
+버튼 클릭 시 inputRef.current.focus()로 입력 필드에 포커스 설정.
+
+
+2. 렌더링 간 상태 유지
+React의 상태(useState)는 값이 변경되면 컴포넌트를 다시 렌더링하지만, useRef는 값을 유지하면서도 렌더링을 트리거하지 않습니다.
+
+예제: 렌더링 횟수 추적
+import React, { useState, useRef } from "react";
+
+function RenderCounter() {
+  const [count, setCount] = useState(0);
+  const renderCount = useRef(1); // 렌더링 횟수 추적
+
+  renderCount.current++; // 렌더링될 때마다 증가
+
+  return (
+    <div>
+      <p>카운트: {count}</p>
+      <p>렌더링 횟수: {renderCount.current}</p>
+      <button onClick={() => setCount(count + 1)}>카운트 증가</button>
+    </div>
+  );
+}
+
+export default RenderCounter;
+작동 과정:
+renderCount는 렌더링 횟수를 추적하지만, 컴포넌트를 다시 렌더링하지 않습니다.
+버튼 클릭 시 setCount로 상태가 변경되고, renderCount.current가 증가.
+화면에 renderCount.current의 값이 출력.
+
+
+3. 이전 상태 값 저장
+useRef를 사용하면 이전 상태 값을 저장하고 비교할 수 있습니다.
+
+예제: 이전 값 추적
+import React, { useState, useRef, useEffect } from "react";
+
+function PreviousValueTracker() {
+  const [count, setCount] = useState(0);
+  const prevCount = useRef(0); // 이전 값을 저장하는 ref
+
+  useEffect(() => {
+    prevCount.current = count; // 렌더링 후 이전 값 업데이트
+  });
+
+  return (
+    <div>
+      <p>현재 값: {count}</p>
+      <p>이전 값: {prevCount.current}</p>
+      <button onClick={() => setCount(count + 1)}>카운트 증가</button>
+    </div>
+  );
+}
+
+export default PreviousValueTracker;
+작동 과정:
+prevCount는 컴포넌트가 렌더링될 때마다 useEffect를 통해 업데이트.
+현재 값과 이전 값을 화면에 표시.
