@@ -32,7 +32,9 @@ useState
 useState는 React의 함수형 컴포넌트에서 상태 관리를 위해 사용되는 Hook입니다.
 예시 :
 <button onClinck={함수} />
-<input value={현재상태} onChange={함수} />
+<input value={현재상태} onChange={함수} /> 함수(){setState(e.target.value)}
+
+
 
 useEffect
 useEffect는 React의 Hook 중 하나로, 컴포넌트의 생명주기와 관련된 작업을 처리하기 위해 사용됩니다. 함수형 컴포넌트에서 사이드 이펙트(외부 시스템과의 상호작용, 비동기 작업 등)를 관리할 수 있도록 도와줍니다.
