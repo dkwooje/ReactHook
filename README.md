@@ -58,6 +58,16 @@ useEffect(() => {
 의존성 값이 변경될 때 실행
 컴포넌트가 언마운트되거나 업데이트 전에 정리 작업 실행
 
+    useEffect(()=>{
+        const timer = setInterval(()=>{  //타이머 설정
+        console.log('타이머 돌아가는중....');
+        }, 500);
+
+        return () =>{
+            clearInterval(timer);  //타이머 종료
+            console.log('타이머가 종료되었습니다.');
+        }
+     }, []);
 
 3.useRef
 
