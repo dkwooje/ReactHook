@@ -110,7 +110,7 @@ React에서 useEffect와 함께 사용하여 타이머 설정 및 정리를 관�
 clearInterval: 타이머를 중지하고 메모리 누수를 방지.
 사용 예시: 실시간 시계, 주기적인 데이터 갱신, 애니메이션 효과 등.
 
-3.useRef
+useRef
 
 useRef의 특징:
 1.React 렌더링 사이클에 영향을 주지 않음
@@ -205,3 +205,153 @@ export default PreviousValueTracker;
 작동 과정:
 prevCount는 컴포넌트가 렌더링될 때마다 useEffect를 통해 업데이트.
 현재 값과 이전 값을 화면에 표시.
+
+useContext
+useContext는 React에서 컨텍스트(Context)를 쉽게 사용하기 위한 Hook입니다. useContext를 사용하면 컴포넌트 트리 전체를 통해 데이터를 효율적으로 공유할 수 있습니다. 이를 통해 Props Drilling 문제를 해결할 수 있습니다.
+컨텍스트(Context)란?
+React에서 데이터를 컴포넌트 간에 공유하려면 일반적으로 props를 사용합니다. 하지만 깊게 중첩된 컴포넌트에 데이터를 전달할 경우, 중간 단계의 컴포넌트가 불필요하게 데이터를 전달하게 됩니다. 이를 Props Drilling이라고 합니다.
+이를 해결하기 위해 React에서는 Context API를 제공합니다. Context는 글로벌 상태처럼 데이터를 제공하고, 해당 데이터에 접근할 수 있는 Provider와 Consumer를 제공합니다.
+
+예시
+
+const App = () => {
+  const [user, setUser] = useState({ name: "Alice", age: 25 });
+
+  return (
+    <UserContext.Provider value={user}>
+      <Profile />
+    </UserContext.Provider>
+  );
+};
+
+useContext로 데이터 사용하기 하위 컴포넌트에서 useContext를 사용해 Context의 값을 가져옵니다.
+
+const Profile = () => {
+  const user = useContext(UserContext);
+
+  return (
+    <div>
+      <h1>이름: {user.name}</h1>
+      <p>나이: {user.age}</p>
+    </div>
+  );
+};
+
+export default App;
+
+useContext를 사용해야 하는 이유
+코드 간결화: Consumer 컴포넌트를 사용할 필요 없이 직관적으로 값을 가져올 수 있습니다.
+Props Drilling 방지: 깊은 컴포넌트 트리에서 데이터를 직접 전달하지 않아도 됩니다.
+상태 관리: 글로벌 상태 관리 도구를 사용하지 않아도 간단한 상태 공유가 가능합니다.
+
+예제: 사용자 인증 관리 (User Authentication)
+이 예제에서는 로그인한 사용자 정보를 전역에서 사용할 수 있도록 useContext와 Context API를 활용합니다.
+
+1. Context 파일 생성
+AuthContext를 정의하고 필요한 데이터를 제공하는 AuthProvider를 생성합니다.
+
+import React, { createContext, useState } from "react";
+
+// 1. Context 생성
+export const AuthContext = createContext();
+
+// 2. Provider 컴포넌트 생성
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  // 로그인 함수
+  const login = (name) => {
+    setUser({ name });
+  };
+
+  // 로그아웃 함수
+  const logout = () => {
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+2. App 컴포넌트에서 Provider 사용
+AuthProvider로 전체 앱을 감싸서 AuthContext의 데이터가 하위 컴포넌트에서 접근 가능하도록 만듭니다.
+
+import React from "react";
+import { AuthProvider } from "./AuthContext";
+import Navbar from "./Navbar";
+import Profile from "./Profile";
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <Navbar />
+      <Profile />
+    </AuthProvider>
+  );
+};
+
+export default App;
+3. useContext로 데이터 가져오기
+AuthContext의 데이터를 가져와서 로그인 상태에 따라 다른 UI를 표시합니다.
+
+
+import React, { useContext } from "react";
+import { AuthContext } from "./AuthContext";
+
+const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+
+  return (
+    <nav>
+      <h1>My App</h1>
+      {user ? (
+        <>
+          <span>Welcome, {user.name}!</span>
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <span>Not logged in</span>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
+
+import React, { useContext, useState } from "react";
+import { AuthContext } from "./AuthContext";
+
+const Profile = () => {
+  const { user, login } = useContext(AuthContext);
+  const [name, setName] = useState("");
+
+  const handleLogin = () => {
+    if (name) {
+      login(name);
+      setName("");
+    }
+  };
+
+  return (
+    <div>
+      {user ? (
+        <h2>User: {user.name}</h2>
+      ) : (
+        <div>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button onClick={handleLogin}>Login</button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Profile;
+
