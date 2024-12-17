@@ -400,7 +400,9 @@ const memoizedCallback = useCallback(() => {
 React는 컴포넌트가 리렌더링될 때 내부에 정의된 함수도 새로 생성됩니다. 이때 같은 로직의 함수라도 새로운 참조값이 생성되므로, 이를 props로 전달하면 자식 컴포넌트가 불필요하게 리렌더링될 수 있습니다.
 useCallback을 사용하면 이러한 불필요한 함수 재생성을 방지하여 성능을 최적화할 수 있습니다.
 
-
+useCallback vs useMemo
+useCallback: 함수 자체를 메모이제이션합니다. (함수 참조 유지)
+useMemo: 값을 메모이제이션합니다. 주로 비싼 계산 결과를 캐싱할 때 사용합니다.
 
 
 
