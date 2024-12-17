@@ -355,3 +355,25 @@ const Profile = () => {
 
 export default Profile;
 
+useMemo
+useMemo는 React의 Hook 중 하나로, 비용이 많이 드는 연산 결과를 메모이제이션하여 성능 최적화에 도움을 줍니다.
+useMemo를 사용하면 특정 값이 변경될 때만 연산을 다시 수행하고, 그렇지 않은 경우에는 이전에 계산된 결과를 재사용합니다.
+
+왜 useMemo가 필요한가?
+React 컴포넌트는 상태(State)나 props가 변경되면 다시 렌더링됩니다. 이때 복잡한 계산이나 연산 비용이 큰 함수가 렌더링될 때마다 호출되면 성능에 문제가 생길 수 있습니다.
+useMemo는 이러한 계산을 줄여 불필요한 렌더링 및 연산을 방지합니다.
+
+useMemo의 문법
+
+const memoizedValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
+
+첫 번째 인자: 콜백 함수입니다. 이 함수는 결과 값을 반환하는 비싼 계산을 수행합니다.
+두 번째 인자: 의존성 배열입니다. 배열에 포함된 값이 변경될 때만 콜백 함수가 실행됩니다.
+결과: 메모이제이션된 값을 반환합니다.
+
+useMemo와 React.memo 비교
+useMemo: 계산 결과를 메모이제이션합니다.
+React.memo: 컴포넌트 자체를 메모이제이션하여 불필요한 리렌더링을 방지합니다.
+
