@@ -150,7 +150,7 @@ export default FocusInput;
 작동 과정:
 useRef(null)로 초기 ref 객체 생성.
 ref 속성을 통해 DOM 요소를 inputRef에 연결.
-버튼 클릭 시 inputRef.current.focus()로 입력 필드에 포커스 설정.
+버튼 클릭 시 inputRef.current.focus()로 입력 필드에 포커스 설정..
 
 
 2. 렌더링 간 상태 유지
