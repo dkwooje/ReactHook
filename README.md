@@ -18,7 +18,7 @@ git을 활용해서 원하는 자료를 꺼내 보자.
 알아두면 좋은 기술.
 
 1. e.target.value: 사용자가 입력한 값 출력
-   e: 이벤트 객체.
+   e: 이벤트 객체..
    e.target: 이벤트가 발생한 HTML 요소.
    e.target.value: 해당 요소의 현재 값 (주로 input, textarea, select에서 사용).
 2. e.target.checked: 체크박스나 라디오 버튼의 선택 상태를 확인할 때 사용합니다.
